@@ -70,6 +70,17 @@ to_std_devs = numpy.vectorize(
     ),
 )
 
+covariance_matrix = numpy.vectorize(
+    lambda a: numpy.array(covariance_matrix(a)),
+    otypes=[float],  # Because vectorize() has side effects (dtype setting)
+    signature="(n)->(n,n)",
+    doc=(
+        "Return an array of covariances of given array's numbers with "
+        "uncertainties, given shape ``(d0,d1,d2,...,dN)``, the output shape is "
+        "``(d0,d1,d2,...,dN,dN)``."
+    ),
+)
+
 
 def unumpy_to_numpy_matrix(arr):
     """
